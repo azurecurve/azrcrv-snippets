@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -387,7 +387,7 @@ function azrcrv_s_load_css_javascript_php(){
 		}elseif ($post_meta['snippet-type'] == 'JavaScript'){
 			$custom_javascript .= stripslashes($post->post_content);
 		}elseif ($post_meta['snippet-type'] == 'JavaScript File'){
-			wp_enqueue_script('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.js', array('javascript'), '3.9.1');
+			wp_enqueue_script('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.js', array('jquery'), '3.9.1');
 		}elseif ($post_meta['snippet-type'] == 'CSS Stylesheet'){
 			wp_enqueue_style('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.css', '', '1.0.0');
 		}elseif ($post_meta['snippet-type'] == 'PHP File'){
@@ -395,11 +395,11 @@ function azrcrv_s_load_css_javascript_php(){
 		}
 	}
 	if ($custom_css != ''){
-		//wp_enqueue_style('azrcrv-s', plugins_url('assets/css/style.css', __FILE__), '', '1.0.0');
+		wp_enqueue_style('azrcrv-s', plugins_url('assets/css/style.css', __FILE__), '', '1.0.0');
 		wp_add_inline_style('azrcrv-s', $custom_css);
 	}
 	if ($custom_javascript != ''){
-		//wp_enqueue_script('azrcrv-s', plugins_url('includes/javascript/'.$post->ID.'.js', __FILE__), array('javascript'), '3.9.1');
+		wp_enqueue_script('azrcrv-s', plugins_url('assets/scripts/scripts.js', __FILE__), array('jquery'), '3.9.1');
 		wp_add_inline_script('azrcrv-s', $custom_javascript);
 	}
 }

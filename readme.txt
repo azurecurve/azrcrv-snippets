@@ -1,12 +1,12 @@
 === Snippets ===
 
 Description:	Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
-Version:		1.0.1
+Version:		1.1.0
 Tags:			HTML,PHP,JavaScript,CSS
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/snippets/
-Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v1.0.1/azrcrv-snippets.zip
+Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v1.1.0/azrcrv-snippets.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -61,6 +61,11 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 == Changelog ==
 
 # Changelog
+
+### [Version 1.1.0](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v1.1.0)
+ * Amend to ensure snippets are not visibile or accessible from the front end.
+ * Update azurecurve menu.
+ * Fix bug in azurecurve menu.
 
 ### [Version 1.0.1](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v1.0.1)
  * Fix bug with internal CSS and JavaScript not loading correctly.

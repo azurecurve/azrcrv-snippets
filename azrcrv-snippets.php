@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.0.1
+ * Version: 1.1.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -428,14 +428,19 @@ function azrcrv_s_create_custom_post_type(){
 									'not_found_in_trash' => esc_html__('No Snippet found in Trash', 'azrcrv-s'),
 									'parent' => esc_html__('Parent Snippet', 'azrcrv-s')
 								),
-			'public' => true,
+			'public' => false,
 			'exclude_from_search' => true,
 			'publicly_queryable' => false,
 			'menu_position' => 50,
 			'supports' => array('title', 'revisions', 'editor'),
 			'taxonomies' => array(''),
 			'menu_icon' => plugins_url('assets/images/snippet-16x16.png', __FILE__),
-			'has_archive' => false
+			'has_archive' => false,
+			'show_ui' => true,
+			'show_in_menu' => true,
+			'show_in_admin_bar' => true,
+			'show_in_nav_menus' => false,
+			'show_in_rest' => false,
 		)
 	);
 }

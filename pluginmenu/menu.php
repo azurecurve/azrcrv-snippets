@@ -52,8 +52,10 @@ if (!function_exists('azrcrv_display_plugin_menu')){
 		$plugin_array = get_option('azrcrv-plugin-menu');
 		
 		foreach($plugin_array as $plugin_name => $plugin_details) {
-			if (is_plugin_active($plugin_details['plugin_link'])){
-				echo '<a href="'.$plugin_details['admin_URL'].'" class="azrcrv-plugin-index">'.$plugin_name.'</a>';
+			if ($plugin_details['retired'] == 0){
+				if (is_plugin_active($plugin_details['plugin_link'])){
+					echo '<a href="'.$plugin_details['admin_URL'].'" class="azrcrv-plugin-index">'.$plugin_name.'</a>';
+				}
 			}
 		}
 		
@@ -66,9 +68,11 @@ if (!function_exists('azrcrv_display_plugin_menu')){
 		$countofplugins = 0;
 		
 		foreach($plugin_array as $plugin_name => $plugin_details) {
-			if (!is_plugin_active($plugin_details['plugin_link'])){
-				echo '<a href="'.$plugin_details['dev_URL'].'" class="azrcrv-plugin-index">'.$plugin_name.'</a>';
-				$countofplugins += 1;
+			if ($plugin_details['retired'] == 0){
+				if (!is_plugin_active($plugin_details['plugin_link'])){
+					echo '<a href="'.$plugin_details['dev_URL'].'" class="azrcrv-plugin-index">'.$plugin_name.'</a>';
+					$countofplugins += 1;
+				}
 			}
 		}
 		
@@ -227,8 +231,8 @@ if (!function_exists('azrcrv_populate_plugin_menu_s')){
 				'plugin_link' => 'azrcrv-get-github-file/azrcrv-get-github-file.php',
 				'admin_URL' => 'admin.php?page=azrcrv-gghf',
 				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/get-github-file/',
-				'retired' => 1,
-				'updated' => '2020-10-30',
+				'retired' => 0,
+				'updated' => '2020-11-20',
 			),
 			'Icons' => array(
 				'plugin_link' => 'azrcrv-icons/azrcrv-icons.php',
@@ -414,6 +418,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_s')){
 				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/url-shortener/',
 				'retired' => 0,
 				'updated' => '2020-04-04',
+			),
+			'Widget Announcements' => array(
+				'plugin_link' => 'azrcrv-widget-announcements/azrcrv-widget-announcements.php',
+				'admin_URL' => 'admin.php?page=azrcrv-wa',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/widget-announcements/',
+				'retired' => 0,
+				'updated' => '2020-11-13',
 			),
 		);
 		

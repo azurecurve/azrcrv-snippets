@@ -63,7 +63,7 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 # Changelog
 
 ### [Version 1.1.0](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v1.1.0)
- * Amend to ensure snippets are not visibile or accessible from the front end.
+ * Amend to ensure snippets are not visible or accessible from the front end.
  * Update azurecurve menu.
  * Fix bug in azurecurve menu.
 

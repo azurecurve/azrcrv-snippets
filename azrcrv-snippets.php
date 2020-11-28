@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -617,15 +617,15 @@ function azrcrv_s_delete_postmeta($post_id){
 	$options = azrcrv_s_get_option('azrcrv-s');
 	$snippet_folder = trailingslashit($options['snippet-folder']);
 	
-	if ($_POST['azrcrv_s_metafields']['snippet-type'] == 'CSS Stylesheet'){
+	if (isset($_POST['azrcrv_s_metafields']['snippet-type']) AND $_POST['azrcrv_s_metafields']['snippet-type'] == 'CSS Stylesheet'){
 		$file_id = $snippet_folder.'snippet-'.$post_id.'.css';
 		unlink ($file_id);
 	}
-	if ($_POST['azrcrv_s_metafields']['snippet-type'] == 'JavaScript File'){
+	if (isset($_POST['azrcrv_s_metafields']['snippet-type']) AND $_POST['azrcrv_s_metafields']['snippet-type'] == 'JavaScript File'){
 		$file_id = $snippet_folder.'snippet-'.$post_id.'.js';
 		unlink ($file_id);
 	}
-	if ($_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function'){
+	if (isset($_POST['azrcrv_s_metafields']['snippet-type']) AND $_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function'){
 		$file_id = $snippet_folder.'snippet-'.$post_id.'.php';
 		unlink ($file_id);
 	}

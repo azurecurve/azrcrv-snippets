@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.1.1
+ * Version: 1.2.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -128,6 +128,7 @@ function azrcrv_s_get_option($option_name){
  
 	$defaults = array(
 						'snippet-folder' => trailingslashit($upload_dir['basedir']),
+						'advanced-mode' => 0,
 					);
 
 	$options = get_option($option_name, $defaults);
@@ -268,33 +269,23 @@ function azrcrv_s_display_options(){
 						<input name="snippet-folder" type="text" id="snippet-folder" value="<?php if (strlen($options['snippet-folder']) > 0){ echo stripslashes($options['snippet-folder']); } ?>" class="large-text" />
 						<p class="description" id="snippet-folder-description"><?php esc_html_e('Specify the snippet folder where files should be created; if the folder does not exist, it will be created with 0777 permissions.', 'snippets'); ?></p></td>
 					</td></tr>
+					
+					<tr>
+						<th scope="row">
+							<label for="advanced-mode">
+								<?php _e('Enable advanced mode', 'snippets'); ?>
+							</label>
+						</th>
+						<td>
+							<label for="advanced-mode"><input name="advanced-mode" type="checkbox" id="advanced-mode" value="1" <?php checked('1', $options['advanced-mode']); ?> /><?php _e('Enable advanced mode?', 'snippets'); ?></label>
+							<p class="description"><?php esc_html_e('Advanced mode will allow the creation of PHP snippets and files which are executed on the front-end only; great care should be taken as malformed PHP will white-screen the site.', 'snippets'); ?></p>
+						</td>
+					</tr>
 				
 				</table>
 				<input type="submit" value="Save Changes" class="button-primary"/>
 			</form>
 		</fieldset>
-		<p>
-			<?php esc_html_e('There are sister plugins to this one which allow shortcodes to be used in comments and comments:', 'snippets'); ?>
-			<ul class='azrcrv-plugin-index'>
-				<li>
-					<?php
-					if (azrcrv_s_is_plugin_active('azrcrv-shortcodes-in-comments/azrcrv-shortcodes-in-comments.php')){
-						echo "<a href='admin.php?page=azrcrv-siw' class='azrcrv-plugin-index'>Shortcodes in Comments</a>";
-					}else{
-						echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-comments/' class='azrcrv-plugin-index'>Shortcodes in Comments</a>";
-					}
-					?>
-				</li>
-				<li>
-					<?php
-					if (azrcrv_s_is_plugin_active('azrcrv-shortcodes-in-widgets/azrcrv-shortcodes-in-widgets.php')){
-						echo "<a href='admin.php?page=azrcrv-siw' class='azrcrv-plugin-index'>Shortcodes in Widgets</a>";
-					}else{
-						echo "<a href='https://development.azurecurve.co.uk/classicpress-plugins/shortcodes-in-widgets/' class='azrcrv-plugin-index'>Shortcodes in Widgets</a>";
-					}
-					?>
-				</li>
-			</ul>
 	</div>
 	<?php
 }
@@ -332,6 +323,13 @@ function azrcrv_s_save_options(){
 		}
 		if (!file_exists(sanitize_text_field($_POST[$option_name]))){
 			mkdir(sanitize_text_field($_POST[$option_name]), 0777, true);
+		}
+		
+		$option_name = 'advanced-mode';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = 1;
+		}else{
+			$options[$option_name] = 0;
 		}
 				
 		// Store updated options array to database
@@ -472,7 +470,11 @@ function azrcrv_s_add_meta_box(){
 function azrcrv_s_show_meta_box(){
 	global $post;  
 	
-	$meta_fields = get_post_meta($post->ID, 'azrcrv_s_metafields', true); ?>
+	$meta_fields = get_post_meta($post->ID, 'azrcrv_s_metafields', true);
+	
+	$options = azrcrv_s_get_option('azrcrv-s');
+	
+	?>
 
 	<input type="hidden" name="azrcrv_s_meta_box_nonce" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>">
 
@@ -484,10 +486,12 @@ function azrcrv_s_show_meta_box(){
 			echo "<option value='HTML' ".selected($meta_fields['snippet-type'], 'HTML').">".esc_html__('HTML', 'snippets')."</option>";
 			echo "<option value='CSS' ".selected($meta_fields['snippet-type'], 'CSS').">".esc_html__('Internal CSS', 'snippets')."</option>";
 			echo "<option value='CSS Stylesheet' ".selected($meta_fields['snippet-type'], 'CSS Stylesheet').">".esc_html__('CSS Stylesheet', 'snippets')."</option>";
-			echo "<option value='JavaScript' ".selected($meta_fields['snippet-type'], 'JavaScript').">".esc_html__('Internal JavaScript', 'snippets')."</option>";
-			echo "<option value='JavaScript File' ".selected($meta_fields['snippet-type'], 'JavaScript File').">".esc_html__('JavaScript File', 'snippets')."</option>";
-			echo "<option value='PHP' ".selected($meta_fields['snippet-type'], 'PHP').">".esc_html__('PHP', 'snippets')."</option>";
-			echo "<option value='PHP Function' ".selected($meta_fields['snippet-type'], 'PHP Function').">".esc_html__('PHP Function', 'snippets')."</option>";
+			if ($options['advanced-mode'] == 1){
+				echo "<option value='JavaScript' ".selected($meta_fields['snippet-type'], 'JavaScript').">".esc_html__('Internal JavaScript', 'snippets')."</option>";
+				echo "<option value='JavaScript File' ".selected($meta_fields['snippet-type'], 'JavaScript File').">".esc_html__('JavaScript File', 'snippets')."</option>";
+				echo "<option value='PHP' ".selected($meta_fields['snippet-type'], 'PHP').">".esc_html__('PHP', 'snippets')."</option>";
+				echo "<option value='PHP Function' ".selected($meta_fields['snippet-type'], 'PHP Function').">".esc_html__('PHP Function', 'snippets')."</option>";
+			}
 		?>
 		</select>
 	</p>

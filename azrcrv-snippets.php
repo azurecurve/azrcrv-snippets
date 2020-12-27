@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.3.0
+ * Version: 1.4.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -39,7 +39,7 @@ require_once(dirname(__FILE__).'/libraries/updateclient/UpdateClient.class.php')
 add_action('admin_menu', 'azrcrv_s_create_admin_menu');
 add_action('admin_post_azrcrv_s_save_options', 'azrcrv_s_save_options');
 add_action('plugins_loaded', 'azrcrv_s_load_languages');
-add_action('wp_enqueue_scripts', 'azrcrv_s_load_css_javascript_php');
+add_action('wp_enqueue_scripts', 'azrcrv_s_load_css_javascript_php', 50);
 add_action('init', 'azrcrv_s_create_custom_post_type');
 add_action('add_meta_boxes', 'azrcrv_s_add_meta_box');
 add_action('save_post', 'azrcrv_s_save_meta_box');
@@ -444,7 +444,7 @@ function azrcrv_s_create_custom_post_type(){
 }
 
 /**
- * Add meta hox.
+ * Add meta box.
  *
  * @since 1.0.0
  *

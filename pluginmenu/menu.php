@@ -21,7 +21,7 @@ if (!function_exists('azrcrv_add_plugin_menu')){
 				'manage_options',
 				'azrcrv-plugin-menu',
 				'azrcrv_display_plugin_menu',
-				plugins_url('/pluginmenu/images/Favicon-16x16.png', __DIR__)
+				plugins_url('/pluginmenu/images/logo.svg', __DIR__)
 			);
 			add_submenu_page(
 				'azrcrv-plugin-menu',
@@ -192,6 +192,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_s')){
 				'retired' => 0,
 				'updated' => '2020-04-04',
 			),
+			'Events' => array(
+				'plugin_link' => 'azrcrv-events/azrcrv-events.php',
+				'admin_URL' => 'admin.php?page=azrcrv-e',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/events/',
+				'retired' => 0,
+				'updated' => '2020-30-11',
+			),
 			'Filtered Categories' => array(
 				'plugin_link' => 'azrcrv-filtered-categories/azrcrv-filtered-categories.php',
 				'admin_URL' => 'admin.php?page=azrcrv-fc',
@@ -218,7 +225,7 @@ if (!function_exists('azrcrv_populate_plugin_menu_s')){
 				'admin_URL' => 'admin.php?page=azrcrv-ft',
 				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/from-twitter/',
 				'retired' => 0,
-				'updated' => '2020-04-04',
+				'updated' => '2020-12-26',
 			),
 			'Gallery From Folder' => array(
 				'plugin_link' => 'azrcrv-gallery-from-folder/azrcrv-gallery-from-folder.php',
@@ -411,6 +418,13 @@ if (!function_exists('azrcrv_populate_plugin_menu_s')){
 				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/toggle-showhide/',
 				'retired' => 0,
 				'updated' => '2020-04-04',
+			),
+			'Update Admin Menu' => array(
+				'plugin_link' => 'azrcrv-update-admin-menu/azrcrv-update-admin-menu.php',
+				'admin_URL' => 'admin.php?page=azrcrv-uam',
+				'dev_URL' => 'https://development.azurecurve.co.uk/classicpress-plugins/update-admin-menu/',
+				'retired' => 0,
+				'updated' => '2020-12-26',
 			),
 			'URL Shortener' => array(
 				'plugin_link' => 'azrcrv-url-shortener/azrcrv-url-shortener.php',

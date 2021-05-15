@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 1.4.0
+ * Version: 2.0.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -127,7 +127,8 @@ function azrcrv_s_get_option($option_name){
 	$upload_dir = wp_upload_dir();
  
 	$defaults = array(
-						'snippet-folder' => trailingslashit($upload_dir['basedir']),
+						'snippet-folder' => trailingslashit($upload_dir['basedir']).'snippets/',
+						'snippet-url' => trailingslashit($upload_dir['baseurl']).'snippets/',
 						'advanced-mode' => 0,
 					);
 
@@ -153,7 +154,7 @@ function azrcrv_s_add_plugin_action_link($links, $file){
 	}
 
 	if ($file == $this_plugin){
-		$settings_link = '<a href="'.admin_url('admin.php?page=azrcrv-s').'"><img src="'.plugins_url('/pluginmenu/images/Favicon-16x16.png', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'snippets').'</a>';
+		$settings_link = '<a href="'.admin_url('admin.php?page=azrcrv-s').'"><img src="'.plugins_url('/pluginmenu/images/logo.svg', __FILE__).'" style="padding-top: 2px; margin-right: -5px; height: 16px; width: 16px;" alt="azurecurve" />'.esc_html__('Settings' ,'snippets').'</a>';
 		array_unshift($links, $settings_link);
 	}
 
@@ -231,7 +232,12 @@ function azrcrv_s_display_options(){
 	?>
 	<div id="azrcrv-n-general" class="wrap">
 		<fieldset>
-			<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+			<h1>
+				<?php
+					echo '<a href="https://development.azurecurve.co.uk/classicpress-plugins/"><img src="'.plugins_url('/pluginmenu/images/logo.svg', __FILE__).'" style="padding-right: 6px; height: 20px; width: 20px;" alt="azurecurve" /></a>';
+					esc_html_e(get_admin_page_title());
+				?>
+			</h1>
 			<?php if(isset($_GET['settings-updated'])){ ?>
 				<div class="notice notice-success is-dismissible">
 					<p><strong><?php esc_html_e('Settings have been saved.', 'snippets'); ?></strong></p>
@@ -239,14 +245,14 @@ function azrcrv_s_display_options(){
 			<?php } ?>
 			<form method="post" action="admin-post.php">
 				<input type="hidden" name="action" value="azrcrv_s_save_options" />
-				<input name="page_options" type="hidden" value="snippet-folder" />
+				<input name="page_options" type="hidden" value="snippet-folder,snippet-url,advanced-mode" />
 				
 				<!-- Adding security through hidden referrer field -->
 				<?php wp_nonce_field('azrcrv-s', 'azrcrv-s-nonce'); ?>
 				<table class="form-table">
 				
 					<tr><td colspan="2">
-						<?php _e('<p>Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.</p>
+						<?php esc_html_e('<p>Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.</p>
 						
 <p>Snippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.</p>
 
@@ -266,18 +272,23 @@ function azrcrv_s_display_options(){
 					</td></tr>
 					
 					<tr><th scope="row"><label for="snippet-folder"><?php esc_html_e('Snippet Folder', 'snippets'); ?></label></th><td>
-						<input name="snippet-folder" type="text" id="snippet-folder" value="<?php if (strlen($options['snippet-folder']) > 0){ echo stripslashes($options['snippet-folder']); } ?>" class="large-text" />
+						<input name="snippet-folder" type="text" id="snippet-folder" value="<?php if (strlen($options['folder']) > 0){ echo stripslashes($options['folder']); } ?>" class="large-text" />
 						<p class="description" id="snippet-folder-description"><?php esc_html_e('Specify the snippet folder where files should be created; if the folder does not exist, it will be created with 0777 permissions.', 'snippets'); ?></p></td>
 					</td></tr>
+							
+							<tr><th scope="row"><label for="snippet-url"><?php esc_html_e('Snippet URL', 'snippets'); ?></label></th><td>
+								<input name="url" type="text" id="snippet-url" value="<?php if (strlen($options['snippet-url']) > 0){ echo stripslashes($options['snippet-url']); } ?>" class="large-text" />
+								<p class="description" id="snippet-url-description"><?php esc_html_e('Specify the URL for the snippets folder.', 'snippets'); ?></p></td>
+							</td></tr>
 					
 					<tr>
 						<th scope="row">
 							<label for="advanced-mode">
-								<?php _e('Enable advanced mode', 'snippets'); ?>
+								<?php esc_html_e('Enable advanced mode', 'snippets'); ?>
 							</label>
 						</th>
 						<td>
-							<label for="advanced-mode"><input name="advanced-mode" type="checkbox" id="advanced-mode" value="1" <?php checked('1', $options['advanced-mode']); ?> /><?php _e('Enable advanced mode?', 'snippets'); ?></label>
+							<label for="advanced-mode"><input name="advanced-mode" type="checkbox" id="advanced-mode" value="1" <?php checked('1', $options['advanced-mode']); ?> /><?php esc_html_e('Enable advanced mode?', 'snippets'); ?></label>
 							<p class="description"><?php esc_html_e('Advanced mode will allow the creation of PHP snippets and files which are executed on the front-end only; great care should be taken as malformed PHP will white-screen the site.', 'snippets'); ?></p>
 						</td>
 					</tr>
@@ -324,6 +335,11 @@ function azrcrv_s_save_options(){
 		if (!file_exists(sanitize_text_field($_POST[$option_name]))){
 			mkdir(sanitize_text_field($_POST[$option_name]), 0777, true);
 		}
+			
+		$option_name = 'snippet-url';
+		if (isset($_POST[$option_name])){
+			$options[$option_name] = sanitize_url($_POST[$option_name]);
+		}
 		
 		$option_name = 'advanced-mode';
 		if (isset($_POST[$option_name])){
@@ -351,6 +367,7 @@ function azrcrv_s_load_css_javascript_php(){
 	
 	$options = azrcrv_s_get_option('azrcrv-s');
 	$snippet_folder = trailingslashit($options['snippet-folder']);
+	$snippet_url = trailingslashit($options['snippet-url']);
 		
 	global $wpdb;
 	
@@ -385,9 +402,10 @@ function azrcrv_s_load_css_javascript_php(){
 		}elseif ($post_meta['snippet-type'] == 'JavaScript'){
 			$custom_javascript .= stripslashes($post->post_content);
 		}elseif ($post_meta['snippet-type'] == 'JavaScript File'){
-			wp_enqueue_script('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.js', array('jquery'), '3.9.1');
+			//wp_enqueue_script('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.js', array('jquery'), '3.9.1');
+			wp_enqueue_script('azrcrv-s-'.$post->ID, $snippet_url.'snippet-'.$post->ID.'.js', array('jquery'), '3.9.1');
 		}elseif ($post_meta['snippet-type'] == 'CSS Stylesheet'){
-			wp_enqueue_style('azrcrv-s-'.$post->ID, $snippet_folder.'snippet-'.$post->ID.'.css', '', '1.0.0');
+			wp_enqueue_style('azrcrv-s-'.$post->ID, $snippet_url.'snippet-'.$post->ID.'.css', '', '1.0.0');
 		}elseif ($post_meta['snippet-type'] == 'PHP File'){
 			include_once ($snippet_folder.'snippet-'.$post->ID.'.php');
 		}
@@ -479,7 +497,7 @@ function azrcrv_s_show_meta_box(){
 	<input type="hidden" name="azrcrv_s_meta_box_nonce" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>">
 
 	<p>
-		<label for="azrcrv_s_metafields[snippet-type]"><?php _e('Snippet Type', 'snippets'); ?></label>
+		<label for="azrcrv_s_metafields[snippet-type]"><?php esc_html_e('Snippet Type', 'snippets'); ?></label>
 		&nbsp;&nbsp;&nbsp;
 		<select name="azrcrv_s_metafields[snippet-type]" style="width: 300px;">
 		<?php

@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -272,7 +272,7 @@ function azrcrv_s_display_options(){
 					</td></tr>
 					
 					<tr><th scope="row"><label for="snippet-folder"><?php esc_html_e('Snippet Folder', 'snippets'); ?></label></th><td>
-						<input name="snippet-folder" type="text" id="snippet-folder" value="<?php if (strlen($options['folder']) > 0){ echo stripslashes($options['folder']); } ?>" class="large-text" />
+						<input name="snippet-folder" type="text" id="snippet-folder" value="<?php if (strlen($options['snippet-folder']) > 0){ echo stripslashes($options['snippet-folder']); } ?>" class="large-text" />
 						<p class="description" id="snippet-folder-description"><?php esc_html_e('Specify the snippet folder where files should be created; if the folder does not exist, it will be created with 0777 permissions.', 'snippets'); ?></p></td>
 					</td></tr>
 							

@@ -1,0 +1,169 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Snippets\n"
+"POT-Creation-Date: 2021-12-27 18:18+0000\n"
+"PO-Revision-Date: 2019-02-24 18:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: translate@azurecurve.co.uk\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: azrcrv-snippets.php\n"
+
+#: azrcrv-snippets.php:157 azrcrv-snippets.php:176
+msgid "Settings"
+msgstr ""
+
+#: azrcrv-snippets.php:175 azrcrv-snippets.php:185
+msgid "Snippets Settings"
+msgstr ""
+
+#: azrcrv-snippets.php:186 azrcrv-snippets.php:433
+msgid "Snippets"
+msgstr ""
+
+#: azrcrv-snippets.php:227
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: azrcrv-snippets.php:243
+msgid "Settings have been saved."
+msgstr ""
+
+#: azrcrv-snippets.php:255
+msgid ""
+"<p>Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.</p>\n"
+"\t\t\t\t\t\t\n"
+"<p>Snippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.</p>\n"
+"\n"
+"<p>The following types of snippet can be created:</p>\n"
+"<p>- HTML - can be loaded using the shortcode.<br />\n"
+"- Internal CSS - automatically added as internal stylesheet.<br />\n"
+"- CSS Stylesheet - automatically loaded.<br />\n"
+"- Internal JavaScript - automatically added as internal JavaScript.<br />\n"
+"- JavaScript File - automatically loaded.<br />\n"
+"- PHP - can be loaded using the shortcode.<br />\n"
+"- PHP File - automatically loaded.</p>\n"
+"\n"
+"<p>Shortcode usage is either <strong>[snippet id=1013]</strong> (where the supplied id value is a snippet post_id) or <strong>[snippet slug=\"hello-world\"]</strong>.</p>\n"
+"\n"
+"<p>All snippets are loaded only on the site frontend; this protects the admin dashboard from white screen errors caused by badly formed PHP.</p>"
+msgstr ""
+
+#: azrcrv-snippets.php:274
+msgid "Snippet Folder"
+msgstr ""
+
+#: azrcrv-snippets.php:276
+msgid "Specify the snippet folder where files should be created; if the folder does not exist, it will be created with 0777 permissions."
+msgstr ""
+
+#: azrcrv-snippets.php:279
+msgid "Snippet URL"
+msgstr ""
+
+#: azrcrv-snippets.php:281
+msgid "Specify the URL for the snippets folder."
+msgstr ""
+
+#: azrcrv-snippets.php:287
+msgid "Enable advanced mode"
+msgstr ""
+
+#: azrcrv-snippets.php:291
+msgid "Enable advanced mode?"
+msgstr ""
+
+#: azrcrv-snippets.php:292
+msgid "Advanced mode will allow the creation of PHP snippets and files which are executed on the front-end only; great care should be taken as malformed PHP will white-screen the site."
+msgstr ""
+
+#: azrcrv-snippets.php:323
+msgid "You do not have permissions to perform this action"
+msgstr ""
+
+#: azrcrv-snippets.php:434
+msgid "Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:435
+msgid "Add New"
+msgstr ""
+
+#: azrcrv-snippets.php:436
+msgid "Add New Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:437
+msgid "Edit"
+msgstr ""
+
+#: azrcrv-snippets.php:438
+msgid "Edit Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:439
+msgid "New Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:440
+msgid "View"
+msgstr ""
+
+#: azrcrv-snippets.php:441
+msgid "View Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:442
+msgid "Search Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:443
+msgid "No Snippet found"
+msgstr ""
+
+#: azrcrv-snippets.php:444
+msgid "No Snippet found in Trash"
+msgstr ""
+
+#: azrcrv-snippets.php:445
+msgid "Parent Snippet"
+msgstr ""
+
+#: azrcrv-snippets.php:500
+msgid "Snippet Type"
+msgstr ""
+
+#: azrcrv-snippets.php:504
+msgid "HTML"
+msgstr ""
+
+#: azrcrv-snippets.php:505
+msgid "Internal CSS"
+msgstr ""
+
+#: azrcrv-snippets.php:506
+msgid "CSS Stylesheet"
+msgstr ""
+
+#: azrcrv-snippets.php:508
+msgid "Internal JavaScript"
+msgstr ""
+
+#: azrcrv-snippets.php:509
+msgid "JavaScript File"
+msgstr ""
+
+#: azrcrv-snippets.php:510
+msgid "PHP"
+msgstr ""
+
+#: azrcrv-snippets.php:511
+msgid "PHP File"
+msgstr ""

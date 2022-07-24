@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 2.1.2
+ * Version: 2.1.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -680,21 +680,31 @@ function azrcrv_s_output_snippet_shortcode($atts, $content = null) {
 	
 	$snippet = '';
 	if ($id != 0){
-		$post_meta = get_post_meta($id, 'azrcrv_s_metafields', true);
 		
-		if (in_array($post_meta['snippet-type'], array('HTML', 'PHP'))){
-			$snippet = $post->post_content;
-			$snippet = do_shortcode($snippet);
-			if ($post_meta['snippet-type'] == 'PHP'){
-				if (substr($snippet, 0, 5) == '<?php'){
-					$snippet = substr($snippet, 5);
+		if ($post) {
+		
+			if(metadata_exists('post', $post->ID, 'azrcrv_s_metafields')) {
+				
+				$post_meta = get_post_meta($id, 'azrcrv_s_metafields', true);
+				
+				if (in_array($post_meta['snippet-type'], array('HTML', 'PHP'))){
+					$snippet = $post->post_content;
+					$snippet = do_shortcode($snippet);
+					if ($post_meta['snippet-type'] == 'PHP'){
+						if (substr($snippet, 0, 5) == '<?php'){
+							$snippet = substr($snippet, 5);
+						}
+						if (substr($snippet, -2, 2) == '?>'){
+							$snippet = substr($snippet, 0 , -2);
+						}
+						$snippet = azrcrv_s_execute_php($snippet);
+					}
 				}
-				if (substr($snippet, -2, 2) == '?>'){
-					$snippet = substr($snippet, 0 , -2);
-				}
-				$snippet = azrcrv_s_execute_php($snippet);
+				
 			}
+		
 		}
+		
 	}
 	return $snippet;
 }

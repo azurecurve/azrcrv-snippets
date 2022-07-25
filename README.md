@@ -8,13 +8,13 @@ Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative t
 Snippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.
 
 The following types of snippet can be created:
-* HTML - can be loaded using the shortcode.
-* Internal CSS - automatically added as internal stylesheet.
-* CSS Stylesheet - automatically loaded.
-* Internal JavaScript - automatically added as internal JavaScript.
-* JavaScript File - automatically loaded.
-* PHP - can be loaded using the shortcode.
-* PHP File - automatically loaded.
+* **HTML** - can be loaded using the shortcode.
+* **Internal CSS** - automatically added as internal stylesheet.
+* **CSS Stylesheet** - automatically loaded.
+* **Internal JavaScript** - automatically added as internal JavaScript.
+* **JavaScript File** - automatically loaded.
+* **PHP** - can be loaded using the shortcode **(advanced mode only)**.
+* **PHP File** - automatically loaded **(advanced mode only)**.
 
 Shortcode usage is either `[snippet id=1013]` (where the supplied id value is a snippet post_id) or `[snippet slug='hello-world']`.
 

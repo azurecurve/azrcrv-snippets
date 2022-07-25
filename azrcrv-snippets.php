@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 2.1.3
+ * Version: 2.1.4
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -252,23 +252,23 @@ function azrcrv_s_display_options(){
 				<table class="form-table">
 				
 					<tr><td colspan="2">
-						<?php esc_html_e('<p>Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.</p>
+						<?php printf(esc_html__('%1$sAllows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.%2$s
 						
-<p>Snippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.</p>
+%1$sSnippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.%2$s
+The following types of snippet can be created:%2$s
+%3$s
+%5$s%7$sHTML%8$s - can be loaded using the shortcode.%6$s
+%5$s%7$sInternal CSS%8$s - automatically added as internal stylesheet.%6$s
+%5$s%7$sCSS Stylesheet%8$s - automatically loaded.%6$s
+%5$s%7$sInternal JavaScript%8$s - automatically added as internal JavaScript.%6$s
+%5$s%7$sJavaScript File%8$s - automatically loaded.%6$s
+%5$s%7$sPHP%8$s - can be loaded using the shortcode %7$s(advanced mode only)%8$s.%6$s
+%5$s%7$sPHP File%8$s - automatically loaded %7$s(advanced mode only)%8$s.%6$s
+%4$s
+%1$sShortcode usage is either %9$s[snippet id=1013]%10$s (where the supplied id value is a snippet post_id) or %9$s[snippet slug="hello-world"]%10$s.%2$s
 
-<p>The following types of snippet can be created:</p>
-<p>- HTML - can be loaded using the shortcode.<br />
-- Internal CSS - automatically added as internal stylesheet.<br />
-- CSS Stylesheet - automatically loaded.<br />
-- Internal JavaScript - automatically added as internal JavaScript.<br />
-- JavaScript File - automatically loaded.<br />
-- PHP - can be loaded using the shortcode.<br />
-- PHP File - automatically loaded.</p>
-
-<p>Shortcode usage is either <strong>[snippet id=1013]</strong> (where the supplied id value is a snippet post_id) or <strong>[snippet slug="hello-world"]</strong>.</p>
-
-<p>All snippets are loaded only on the site frontend; this protects the admin dashboard from white screen errors caused by badly formed PHP.</p>'
-						, 'snippets'); ?>
+%1$sAll snippets are loaded only on the site frontend; this protects the admin dashboard from white screen errors caused by badly formed PHP.%2$s'
+						, 'snippets'), '<p>', '</p>', '<ul>', '</ul>', '<li>', '</li>', '<strong>', '</strong>', '<code>', '</code>'); ?>
 					</td></tr>
 					
 					<tr><th scope="row"><label for="snippet-folder"><?php esc_html_e('Snippet Folder', 'snippets'); ?></label></th><td>

@@ -1,12 +1,12 @@
 === Snippets ===
 
 Description:	Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
-Version:		2.1.3
+Version:		2.1.4
 Tags:			HTML,PHP,JavaScript,CSS
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/snippets/
-Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v2.1.3/azrcrv-snippets.zip
+Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v2.1.4/azrcrv-snippets.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires:		1.0.0
@@ -27,13 +27,13 @@ Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative t
 Snippets can be used to create re-usable HTML or JavaScript snippets or to create PHP to add_actions or add_filters without needing to add them to the functions.php file or create a plugin.
 
 The following types of snippet can be created:
-* HTML - can be loaded using the shortcode.
-* Internal CSS - automatically added as internal stylesheet.
-* CSS Stylesheet - automatically loaded.
-* Internal JavaScript - automatically added as internal JavaScript.
-* JavaScript File - automatically loaded.
-* PHP - can be loaded using the shortcode.
-* PHP File - automatically loaded.
+* **HTML** - can be loaded using the shortcode.
+* **Internal CSS** - automatically added as internal stylesheet.
+* **CSS Stylesheet** - automatically loaded.
+* **Internal JavaScript** - automatically added as internal JavaScript.
+* **JavaScript File** - automatically loaded.
+* **PHP** - can be loaded using the shortcode **(advanced mode only)**.
+* **PHP File** - automatically loaded **(advanced mode only)**.
 
 Shortcode usage is either `[snippet id=1013]` (where the supplied id value is a snippet post_id) or `[snippet slug='hello-world']`.
 
@@ -61,6 +61,9 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 == Changelog ==
 
 # Changelog
+
+### [Version 2.1.4](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v2.1.4)
+ * Fix bug with instructions on settings page not displaying correctly.
 
 ### [Version 2.1.3](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v2.1.3)
  * Fix bug to prevent error if snippet selected in shortcode does not exist.

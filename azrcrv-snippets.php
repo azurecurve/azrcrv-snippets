@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 2.1.4
+ * Version: 2.1.5
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/

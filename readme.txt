@@ -1,12 +1,12 @@
 === Snippets ===
 
 Description:	Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
-Version:		2.1.5
+Version:		2.2.0
 Tags:			HTML,PHP,JavaScript,CSS
 Author:			azurecurve
 Author URI:		https://development.azurecurve.co.uk/
 Plugin URI:		https://development.azurecurve.co.uk/classicpress-plugins/snippets/
-Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v2.1.5/azrcrv-snippets.zip
+Download link:	https://github.com/azurecurve/azrcrv-snippets/releases/download/v2.2.0/azrcrv-snippets.zip
 Donate link:	https://development.azurecurve.co.uk/support-development/
 Requires PHP:	5.6
 Requires CP:	1.0
@@ -35,10 +35,11 @@ The following types of snippet can be created:
 * **JavaScript File** - automatically loaded.
 * **PHP** - can be loaded using the shortcode **(advanced mode only)**.
 * **PHP File** - automatically loaded **(advanced mode only)**.
+* **PHP File (Header)** - automatically loaded in wp_head; allows use of `add_action`, `add_filter` and `add_shortcode` **(advanced mode only)**.
 
 Shortcode usage is either `[snippet id=1013]` (where the supplied id value is a snippet post_id) or `[snippet slug='hello-world']`.
 
-All snippets are loaded only on the site frontend; this protects the admin dashboard from white screen errors caused by badly formed PHP.
+All snippets are loaded only on the site frontend; this protects the admin dashboard from white screen errors caused by badly formed PHP; only enable PHP if you **really** know what you're doing.
 
 == Installation ==
 
@@ -63,6 +64,9 @@ This plugin is developed for ClassicPress, but will likely work on WordPress.
 
 # Changelog
 
+### [Version 2.2.0](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v2.2.0)
+ * Add script type of PHP Header.
+ 
 ### [Version 2.1.5](https://github.com/azurecurve/azrcrv-snippets/releases/tag/v2.1.5)
  * Update readme file for compatibility with ClassicPress Directory.
  

@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: Snippets
  * Description: Allows snippets of HTML, PHP, JavaScript and CSS to be created; an alternative to using a functions.php file.
- * Version: 2.1.5
+ * Version: 2.2.0
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/azrcrv-snippets/
@@ -47,6 +47,7 @@ add_action( 'admin_init', 'azcrcrv_s_init' );
 function azcrcrv_s_init() {
     add_action( 'before_delete_post', 'azrcrv_s_delete_postmeta', 10 );
 }
+add_action('wp_head', 'azrcrv_s_load_php_function_header', 0);
 
 // add filters
 add_filter('plugin_action_links', 'azrcrv_s_add_plugin_action_link', 10, 2);
@@ -509,6 +510,7 @@ function azrcrv_s_show_meta_box(){
 				echo "<option value='JavaScript File' ".selected($meta_fields['snippet-type'], 'JavaScript File').">".esc_html__('JavaScript File', 'snippets')."</option>";
 				echo "<option value='PHP' ".selected($meta_fields['snippet-type'], 'PHP').">".esc_html__('PHP', 'snippets')."</option>";
 				echo "<option value='PHP Function' ".selected($meta_fields['snippet-type'], 'PHP Function').">".esc_html__('PHP File', 'snippets')."</option>";
+				echo "<option value='PHP Function (Header)' ".selected($meta_fields['snippet-type'], 'PHP Function (Header)').">".esc_html__('PHP File (Header)', 'snippets')."</option>";
 			}
 		?>
 		</select>
@@ -594,7 +596,7 @@ function azrcrv_s_save_meta_box($post_id){
 		}
 		
 		// PHP Function
-		if ($_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function'){
+		if ($_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function' || $_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function (Header)' ){
 			if ($old){
 			$file_id = $snippet_folder.'snippet-'.$post_id.'.php';
 			}else{
@@ -617,7 +619,7 @@ function azrcrv_s_save_meta_box($post_id){
 			
 			fwrite($file,$post_content);
 			fclose($file);
-		}elseif ($_POST['azrcrv_s_metafields']['snippet-type'] != 'PHP Function'){
+		}elseif ($_POST['azrcrv_s_metafields']['snippet-type'] != 'PHP Function' && $_POST['azrcrv_s_metafields']['snippet-type'] != 'PHP Function (Header)' ){
 			$file_id = $snippet_folder.'snippet-'.$post_id.'.php';
 			unlink ($file_id);
 		}
@@ -647,7 +649,7 @@ function azrcrv_s_delete_postmeta($post_id){
 		$file_id = $snippet_folder.'snippet-'.$post_id.'.js';
 		unlink ($file_id);
 	}
-	if (isset($_POST['azrcrv_s_metafields']['snippet-type']) AND $_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function'){
+	if (isset($_POST['azrcrv_s_metafields']['snippet-type']) AND ( $_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function' || $_POST['azrcrv_s_metafields']['snippet-type'] == 'PHP Function (Header)' ) ){
 		$file_id = $snippet_folder.'snippet-'.$post_id.'.php';
 		unlink ($file_id);
 	}
@@ -741,4 +743,52 @@ function azrcrv_s_execute_php($snippet){
 	$snippet = ob_get_contents();
 	ob_end_clean();
 	return ($snippet);
+}
+
+
+/**
+ * Add PHP functions in wp_head.
+ *
+ * @since 2.2.0
+ *
+ */
+function azrcrv_s_load_php_function_header(){
+	
+	$options = azrcrv_s_get_option('azrcrv-s');
+	$snippet_folder = trailingslashit($options['snippet-folder']);
+	$snippet_url = trailingslashit($options['snippet-url']);
+		
+	global $wpdb;
+	
+	$querystr = "
+		SELECT
+			posts.post_content
+			,posts.ID
+		FROM
+			$wpdb->posts as posts
+		INNER JOIN
+			$wpdb->postmeta as postmeta
+				ON
+					posts.ID = postmeta.post_id
+				AND
+					postmeta.meta_key = 'azrcrv_s_metafields'
+		WHERE
+			posts.post_status = 'publish'
+		AND
+			posts.post_type = 'snippet'
+		ORDER BY
+			posts.post_date DESC
+	";
+	
+	$pageposts = $wpdb->get_results($querystr, OBJECT);
+	
+	foreach ($pageposts as $post){
+		
+		$post_meta = get_post_meta($post->ID, 'azrcrv_s_metafields', true);
+		
+		if ($post_meta['snippet-type'] == 'PHP Function (Header)'){
+			require_once ($snippet_folder.'snippet-'.$post->ID.'.php');
+		}
+	}
+	
 }
